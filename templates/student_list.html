@@ -23,11 +23,12 @@
                 <table class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">T/r</th>
                             <th scope="col">Nomi</th>
                             <th scope="col">Yoshi</th>
                             <th scope="col">Tanlagan kursi</th>
                             <th scope="col">Email</th>
+
                             <th scope="col">action</th>
                         </tr>
                     </thead>
@@ -39,6 +40,8 @@
                             <td>{{ course.age }}</td>
                             <td>{{ course.course_name }}</td>
                             <td>{{ course.email }}</td>
+
+
                             <td><a  href="{% url 'student-detail' course.id %}" class="btn btn-secondary">Taxrirlash</a></td>
                         </tr>
                         {% endfor %}

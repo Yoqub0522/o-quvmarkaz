@@ -24,10 +24,11 @@
                 <table class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">T/r</th>
                             <th scope="col">Nomi</th>
                             <th scope="col">Ma'lumot</th>
                             <th scope="col">Boshlangan vaqti</th>
+                            <th scope="col">action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,7 +38,7 @@
                             <td>{{ course.name }}</td>
                             <td>{{ course.description }}</td>
                             <td>{{ course.start_date }}</td>
-                            <td><a  href="{% url 'course-detail' course.id %}" class="btn btn-secondary">Taxrirlash</a></td>
+                            <td><a  href="{% url 'course-detail' course.id %}" class="btn btn-primary">Taxrirlash</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

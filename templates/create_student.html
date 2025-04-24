@@ -11,7 +11,8 @@
     <h2 class="text-center mb-4">➕ Yangi Talaba qo'shish</h2>
     <div class="card shadow rounded-4">
         <div class="card-body">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
+
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-success">Talabani saqlash</button>

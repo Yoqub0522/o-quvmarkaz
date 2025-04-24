@@ -14,6 +14,7 @@ class Student(models.Model):
     age = models.IntegerField()
     course_name = models.ForeignKey(Course, models.PROTECT)
     email = models.EmailField(unique=True)
+    image = models.ImageField(blank=True,null=True, upload_to='images/')
     registration_date = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
