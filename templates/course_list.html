@@ -1,5 +1,10 @@
 <!-- templates/new/course_list.html -->
-<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}Kurslar ro'yxati{% endblock %}
+
+{% block content %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,7 +33,7 @@
                     <tbody>
                         {% for course in courses %}
                         <tr>
-                            <th scope="row">{{ course.id }}</th>
+                            <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ course.name }}</td>
                             <td>{{ course.description }}</td>
                             <td>{{ course.start_date }}</td>
@@ -50,3 +55,4 @@
 </div>
 </body>
 </html>
+{% endblock %}
