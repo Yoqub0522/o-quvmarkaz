@@ -29,7 +29,10 @@
                             <th scope="col">Tanlagan kursi</th>
                             <th scope="col">Email</th>
                             <th scope="col">rasm</th>
+                            <th scope="col">CV</th>
+                            {% if user.is_authenticated and user.role != 'reader' %}
                             <th scope="col">action</th>
+                            {%endif%}
                         </tr>
                     </thead>
                     <tbody>
@@ -45,9 +48,17 @@
                             {% else %}
                             <td>Rasm mavjud emas</td>
                             {% endif %}
-
+                             {% if student.file %}
+                            <td><a href="{{ student.file.url }}">Yuklash</a> </td>
+                            {% else %}
+                            <td>fayl mavjud emas</td>
+                            {% endif %}
+                            {% if user.is_authenticated and user.role == 'admin' or 'writer' %}
                             <td><a href="{% url 'student-update' student.id %}" class="btn btn-primary"">Yangilash</a>
+                             {% endif %}
+                                {% if user.is_authenticated and user.role == 'admin'%}
                             <a href="{% url 'student-delete' student.id %}" class="btn btn-danger">O‘chirish</a>
+                                {%endif%}
  </td>
 
                         </tr>

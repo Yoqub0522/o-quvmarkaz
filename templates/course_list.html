@@ -14,9 +14,11 @@
 <body class="bg-light">
 <div class="container py-5">
     <h2 class="text-center mb-4">📘 Kurslar ro'yxati</h2>
+    {% if user.is_authenticated and user.role == 'admin' %}
     <div class="mb-4 text-end">
         <a href="{% url 'course-create' %}" class="btn btn-primary">➕ Yangi kurs</a>
     </div>
+    {% endif %}
     <div class="card shadow rounded-4">
         <div class="card-body">
             {% if courses %}
@@ -28,7 +30,9 @@
                             <th scope="col">Nomi</th>
                             <th scope="col">Ma'lumot</th>
                             <th scope="col">Boshlangan vaqti</th>
+
                             <th scope="col">action</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +42,9 @@
                             <td>{{ course.name }}</td>
                             <td>{{ course.description }}</td>
                             <td>{{ course.start_date }}</td>
+
                             <td><a  href="{% url 'course-detail' course.id %}" class="btn btn-primary">Taxrirlash</a></td>
+
                         </tr>
                         {% endfor %}
                     </tbody>

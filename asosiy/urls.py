@@ -7,7 +7,9 @@ from asosiy.settings import MEDIA_URL
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('new.urls')),
+    path('new/', include('new.urls')),
+    path('', include('user.urls')),
+
 ]
 
 if settings.DEBUG:

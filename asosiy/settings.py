@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'new',
+    'user'
+
 ]
 
 MIDDLEWARE = [
@@ -65,10 +67,22 @@ WSGI_APPLICATION = 'asosiy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+# settings.py
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'django_project',             # PostgreSQL bazangiz nomi
+        'USER': 'postgres',           # PostgreSQL foydalanuvchi nomi
+        'PASSWORD': 'Yoqub0522',   # Parolingiz
+        'HOST': 'localhost',        # Yoki masofaviy host
+        'PORT': '5432',             # Standart PostgreSQL porti
     }
 }
 
@@ -114,3 +128,7 @@ MEDIA_URL='/media/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = 'course-list'
+LOGOUT_REDIRECT_URL = '/login/'
+AUTH_USER_MODEL = 'user.CustomUser'

@@ -1,13 +1,27 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
+from user.utils import checking_user, checking_role
 from .forms import CourseForm, StudentForm
 from .models import Course, Student
+from django.db.models import Q
 
 
 def course_list(request):
     courses = Course.objects.all()
-    return render(request, 'course_list.html', {'courses': courses})
 
+
+    q=request.GET.get('q') if request.GET.get('q') !=None else ''
+    if q != '':
+        courses=courses.filter(Q(name__icontains=q)|Q(description__icontains=q))
+
+    context = {
+        'courses': courses,
+        'user': request.user  # foydalanuvchi obyektini uzatamiz
+    }
+
+    return render(request, 'course_list.html', context)
+@checking_role
 def create_course(request):
     if request.method == 'POST':
         form = CourseForm(request.POST)
@@ -20,7 +34,15 @@ def create_course(request):
 
 def student_list(request):
     courses = Student.objects.all()
-    return render(request, 'student_list.html', {'courses': courses})
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    if q != '':
+        courses= courses.filter(Q(full_name__icontains=q) |  Q(email__icontains=q))
+
+    paginator = Paginator(courses, 3)
+    page_number = request.GET.get('page')
+    courses_obj = paginator.get_page(page_number)
+
+    return render(request, 'student_list.html', {'courses': courses,'courses_obj':courses_obj} )
 
 def create_student(request):
     if request.method == 'POST':
@@ -31,7 +53,7 @@ def create_student(request):
     else:
         form = StudentForm()
     return render(request, 'create_student.html', {'form': form})
-
+@checking_role
 def get_student_detail(request, pk):
     student = Student.objects.get(pk=pk)
     context={
@@ -42,7 +64,7 @@ def get_student_detail(request, pk):
 def student_update(request, pk):
     student=Student.objects.get(pk=pk)
     if request.method == 'POST':
-        form = StudentForm(request.POST, instance=student)
+        form = StudentForm(request.POST,request.FILES, instance=student)
         if form.is_valid():
             form.save()
             return redirect('student-list')
@@ -58,6 +80,7 @@ def delete_student(request,pk):
         return redirect('student-list')
     return render(request,'delete_student.html',{'student':student})
 
+@checking_user
 def get_course_detail(request, pk):
     course = Course.objects.get(pk=pk)
     context={
