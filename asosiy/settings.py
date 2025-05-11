@@ -16,7 +16,10 @@ SECRET_KEY = 'django-insecure-lz0sexi(viu(@gj4hpefb3$^i^h+(hg-ct@c0z^klu+%99lxlg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+import os
+
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
+
 
 
 # Application definition
@@ -132,3 +135,8 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'course-list'
 LOGOUT_REDIRECT_URL = '/login/'
 AUTH_USER_MODEL = 'user.CustomUser'
+
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
