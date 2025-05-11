@@ -109,6 +109,26 @@ def delete_course(request,pk):
     return render(request,'delete_course.html',{'course':course})
 
 
+from django.shortcuts import render
+from .models import Course, Student
+
+
+def filter_by_course(request):
+    courses = Course.objects.all()
+    selected_course = request.GET.get('course_id')
+    students = []
+
+    if selected_course:
+        # Tanlangan kursdagi barcha talabalarni olish
+        students = Student.objects.filter(course_name_id=selected_course)
+
+    context = {
+        'courses': courses,
+        'students': students,
+        'selected_course': selected_course
+    }
+    return render(request, 'filter_students.html', context)
+
 
 
 
