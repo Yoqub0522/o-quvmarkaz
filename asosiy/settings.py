@@ -89,12 +89,25 @@ WSGI_APPLICATION = 'asosiy.wsgi.application'
 # }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+#claud
+
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(
+        'postgresql://neondb_owner:npg_mKqIx7wAuVZ4@ep-calm-snow-a491d1ql-pooler.us-east-1.aws.neon.tech/baza',
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
+
 
 
 
