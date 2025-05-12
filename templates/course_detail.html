@@ -25,7 +25,7 @@
                             <th scope="col">Nomi</th>
                             <th scope="col">Ma'lumot</th>
                             <th scope="col">Boshlangan vaqti</th>
-                            {% if user.is_authenticated and user.role == 'admin' or 'writer' %}
+                            {% if user.is_authenticated and user.role != 'reader' %}
                             <th scope="col">action</th>
                             {%endif%}
                         </tr>
@@ -37,7 +37,7 @@
                             <td>{{ course.name }}</td>
                             <td>{{ course.description }}</td>
                             <td>{{ course.start_date }}</td>
-                            {% if user.is_authenticated and user.role == 'admin' or 'writer' %}
+                            {% if user.is_authenticated and user.role != 'reader' %}
                           <td><a href="{% url 'course-update' course.id %}" class="btn btn-primary"">Yangilash</a>
                               {% endif %}
                               {% if user.is_authenticated and user.role == 'admin'%}

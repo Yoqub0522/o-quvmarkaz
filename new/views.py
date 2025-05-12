@@ -21,7 +21,7 @@ def course_list(request):
     }
 
     return render(request, 'course_list.html', context)
-@checking_role
+
 def create_course(request):
     if request.method == 'POST':
         form = CourseForm(request.POST)
@@ -77,7 +77,7 @@ def create_student(request):
     else:
         form = StudentForm()
     return render(request, 'create_student.html', {'form': form})
-@checking_role
+
 def get_student_detail(request, pk):
     student = Student.objects.get(pk=pk)
     context={
@@ -104,7 +104,7 @@ def delete_student(request,pk):
         return redirect('student-list')
     return render(request,'delete_student.html',{'student':student})
 
-@checking_user
+
 def get_course_detail(request, pk):
     course = Course.objects.get(pk=pk)
     context={
