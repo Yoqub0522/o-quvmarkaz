@@ -32,17 +32,41 @@ def create_course(request):
         form = CourseForm()
     return render(request, 'create_course.html', {'form': form})
 
+# def student_list(request):
+#     courses = Student.objects.all()
+#     q = request.GET.get('q') if request.GET.get('q') != None else ''
+#     if q != '':
+#         courses= courses.filter(Q(full_name__icontains=q) |  Q(email__icontains=q))
+#
+#     paginator = Paginator(courses, 3)
+#     page_number = request.GET.get('page')
+#     courses_obj = paginator.get_page(page_number)
+#
+#     return render(request, 'student_list.html', {'courses': courses,'courses_obj':courses_obj} )
+
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from django.db.models import Q
+from new.models import Student
+
+
 def student_list(request):
-    courses = Student.objects.all()
-    q = request.GET.get('q') if request.GET.get('q') != None else ''
-    if q != '':
-        courses= courses.filter(Q(full_name__icontains=q) |  Q(email__icontains=q))
+    students = Student.objects.all().order_by('-registration_date')
+    q = request.GET.get('q') or ''
 
-    paginator = Paginator(courses, 3)
+    if q:
+        students = students.filter(Q(full_name__icontains=q) | Q(email__icontains=q))
+
+    paginator = Paginator(students, 6)
     page_number = request.GET.get('page')
-    courses_obj = paginator.get_page(page_number)
+    page_obj = paginator.get_page(page_number)
 
-    return render(request, 'student_list.html', {'courses': courses,'courses_obj':courses_obj} )
+    return render(request, 'student_list.html', {
+        'page_obj': page_obj,
+        'q': q,
+        'is_paginated': page_obj.has_other_pages()
+    })
+
 
 def create_student(request):
     if request.method == 'POST':

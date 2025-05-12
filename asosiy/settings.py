@@ -18,7 +18,7 @@ DEBUG = True
 
 import os
 
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
+ALLOWED_HOSTS = []
 
 
 
@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'asosiy.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-# settings.py
+
 
 DATABASES = {
     'default': {
@@ -88,6 +88,10 @@ DATABASES = {
         'PORT': '5432',             # Standart PostgreSQL porti
     }
 }
+
+
+
+
 
 
 # Password validation
