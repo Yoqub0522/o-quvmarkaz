@@ -18,7 +18,10 @@ DEBUG = True
 
 import os
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.onrender.com']
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 
@@ -70,25 +73,26 @@ WSGI_APPLICATION = 'asosiy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
+#
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'django_project',             # PostgreSQL bazangiz nomi
+#         'USER': 'postgres',           # PostgreSQL foydalanuvchi nomi
+#         'PASSWORD': 'Yoqub0522',   # Parolingiz
+#         'HOST': 'localhost',        # Yoki masofaviy host
+#         'PORT': '5432',             # Standart PostgreSQL porti
 #     }
 # }
 
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_project',             # PostgreSQL bazangiz nomi
-        'USER': 'postgres',           # PostgreSQL foydalanuvchi nomi
-        'PASSWORD': 'Yoqub0522',   # Parolingiz
-        'HOST': 'localhost',        # Yoki masofaviy host
-        'PORT': '5432',             # Standart PostgreSQL porti
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 
 

@@ -40,6 +40,7 @@
                             <td>{{ student.age }}</td>
                             <td>{{ student.course_name }}</td>
                             <td>{{ student.email }}</td>
+
                             <td><a href="{% url 'student-detail' student.id %}" class="btn btn-secondary">Taxrirlash</a></td>
                         </tr>
                         {% endfor %}

@@ -13,8 +13,8 @@ def register(request):
             user.save()
             return redirect('login')
     else:
-        form = UserForm()  # bu GET so‘rov uchun
-    return render(request, 'register.html', {'form': form})  # bu umumiy qaytish
+        form = UserForm()
+    return render(request, 'register.html', {'form': form})
 
 
 from django.contrib.auth import authenticate, login
@@ -27,7 +27,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('course-list')  # login bo‘lsa, yo‘naltiramiz
+            return redirect('course-list')
         else:
             error = "Login yoki parol noto‘g‘ri"
             return render(request, 'login.html', {'error': error})

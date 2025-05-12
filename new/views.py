@@ -17,7 +17,7 @@ def course_list(request):
 
     context = {
         'courses': courses,
-        'user': request.user  # foydalanuvchi obyektini uzatamiz
+        'user': request.user
     }
 
     return render(request, 'course_list.html', context)
@@ -143,7 +143,7 @@ def filter_by_course(request):
     students = []
 
     if selected_course:
-        # Tanlangan kursdagi barcha talabalarni olish
+
         students = Student.objects.filter(course_name_id=selected_course)
 
     context = {
