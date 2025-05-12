@@ -1,9 +1,7 @@
+# render.yaml
 services:
   - type: web
-    name: django-app
+    name: o-quvmarkaz
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn asosiy.wsgi:application
-    envVars:
-      - key: DJANGO_SETTINGS_MODULE
-        value: asosiy.settings
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python manage.py migrate && gunicorn asosiy.wsgi:application"
