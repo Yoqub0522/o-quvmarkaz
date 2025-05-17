@@ -151,7 +151,7 @@ def send_reset_code_view(request):
         reset_request = PasswordResetRequest.objects.create(user=user, code=code)
 
         # To'g'ri lokal havola
-        reset_link = f"http://127.0.0.1:8000/reset-password/{reset_request.token}/"
+        reset_link = f"http://o-quvmarkaz-roa0.onrender.com/reset-password/{reset_request.token}/"
 
         # Email yuborish
         send_mail(
