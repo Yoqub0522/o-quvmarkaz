@@ -1,6 +1,7 @@
 from django.contrib.auth import logout,login
 from django.shortcuts import render, redirect
 
+from asosiy.settings import EMAIL_HOST_USER
 from user.forms import UserForm
 
 
@@ -163,8 +164,8 @@ def send_reset_code_view(request):
                 f"Parolni yangilash uchun ushbu havolani oching:\n{reset_link}\n\n"
                 f"Agar bu siz bo‘lmasangiz, bu xabarni e'tiborsiz qoldiring."
             ),
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[user.email],
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[user.email,EMAIL_HOST_USER],
             fail_silently=False
         )
 
