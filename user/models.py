@@ -9,6 +9,7 @@ class Role(models.TextChoices):
 
 class CustomUser(AbstractUser):
     role=models.CharField(max_length=20,choices=Role,default=Role.READER)
+    email = models.EmailField(unique=True, blank=False)
 
 
 #parol
