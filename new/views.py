@@ -32,22 +32,11 @@ def create_course(request):
         form = CourseForm()
     return render(request, 'create_course.html', {'form': form})
 
-# def student_list(request):
-#     courses = Student.objects.all()
-#     q = request.GET.get('q') if request.GET.get('q') != None else ''
-#     if q != '':
-#         courses= courses.filter(Q(full_name__icontains=q) |  Q(email__icontains=q))
-#
-#     paginator = Paginator(courses, 3)
-#     page_number = request.GET.get('page')
-#     courses_obj = paginator.get_page(page_number)
-#
-#     return render(request, 'student_list.html', {'courses': courses,'courses_obj':courses_obj} )
 
 from django.core.paginator import Paginator
-from django.shortcuts import render
+
 from django.db.models import Q
-from new.models import Student
+
 
 
 def student_list(request):

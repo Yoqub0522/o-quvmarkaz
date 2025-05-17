@@ -25,7 +25,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'student-list' %}">Talabalar</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'support' %}">Support</a>
+                    </li>
                    <li> <form class="d-flex ms-3" method="get" action="#" name="q">
                 <input class="form-control me-2" type="search" name="q" placeholder="Qidirish..." aria-label="Qidirish">
                 <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
@@ -33,7 +35,7 @@
 </li>
              {% if user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" style="align-items: start" href="#"> {{ user.username }}</a>
+          <a class="nav-link" style="align-items: start" href="#">👤  {{ user.username }}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}">Logout</a>
