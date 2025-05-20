@@ -1,5 +1,5 @@
 from django.contrib.auth import logout,login
-from django.shortcuts import render, redirect
+
 
 from asosiy.settings import EMAIL_HOST_USER
 from user.forms import UserForm
@@ -19,7 +19,7 @@ def register(request):
 
 
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+
 
 def login_view(request):
     if request.method == 'POST':
