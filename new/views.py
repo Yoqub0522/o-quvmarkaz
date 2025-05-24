@@ -141,8 +141,30 @@ def filter_by_course(request):
         'selected_course': selected_course
     }
     return render(request, 'filter_students.html', context)
+import openpyxl
+from django.http import HttpResponse
+def export_to_xslx(request):
+    workbook=openpyxl.Workbook()
+    sheet=workbook.active
+    sheet.title="new"
+    sheet.append([
 
+        'Nomi',
+        'Malumot',
+        'boshlangam vaqt',
+        'action'
 
-
+    ])
+    musics=Course.objects.all()
+    for music in musics:
+        sheet.append([
+            music.name,
+            music.description,
+            music.start_date,
+        ])
+    response=HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition']='attachment;filename="kitoblar.xlsx"'
+    workbook.save(response)
+    return response
 
 

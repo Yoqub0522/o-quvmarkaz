@@ -34,7 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'new',
     'user',
-    'widget_tweaks'
+    'widget_tweaks',
+    'captcha',
+
 
 ]
 
@@ -46,6 +48,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'user.middleware.LoginMiddleware',
+
 ]
 
 ROOT_URLCONF = 'asosiy.urls'
@@ -171,3 +175,41 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "axmedov.yoqub0522@gmail.com"
 
 EMAIL_HOST_PASSWORD = "dsao pkxy bwjg akyo"
+
+# settings.py
+
+from user.signalbot import TelegramHandler  # yuqoriga qo‘shing
+
+TELEGRAM_TOKEN = '7682205826:AAHhi1hZNVmJqaq6zD7-gf_phaPzdxvOxwc'
+TELEGRAM_CHAT_ID = 858267509
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+
+    'formatters': {
+        'telegram': {
+            'format': '[{asctime}] {levelname}: {message}',
+            'style': '{',
+        },
+    },
+
+    'handlers': {
+        'telegram': {
+            'level': 'INFO',
+            'class': 'user.signalbot.TelegramHandler',  # <<< SHU YERGA TO‘G‘RI YO‘L
+            'formatter': 'telegram',
+            'token': TELEGRAM_TOKEN,
+            'chat_id': TELEGRAM_CHAT_ID,
+        },
+    },
+
+    'loggers': {
+        'telegram': {
+            'handlers': ['telegram'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    }
+}
+

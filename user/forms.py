@@ -1,13 +1,18 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from captcha.fields import CaptchaField
+from captcha.fields import CaptchaField
+
 
 User = get_user_model()
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
+    captcha = CaptchaField()  # ✅ CAPTCHA maydoni
+
     class Meta:
         model = User
-        fields = ['username', 'last_name','email', 'password']
+        fields = ['username', 'last_name', 'email', 'password']
         widgets = {'password': forms.PasswordInput()}
 
     def save(self, commit=True):
@@ -16,7 +21,6 @@ class UserForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-
 
 class LoginForm(forms.Form):
     username = forms.CharField()

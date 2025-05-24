@@ -24,7 +24,7 @@ def send_gmail_html(sender, instance, created, **kwargs):
     if created:
         subject = "Kurslarga taklif"
         from_email = EMAIL_HOST_USER
-        to = [instance.email,EMAIL_HOST_USER]
+        to = [instance.email]
         text_content = f"Salom {instance.username}, siz kurslar platformasiga muvaffaqiyatli qo‘shildingiz."
 
         email = EmailMultiAlternatives(subject,text_content, from_email, to)
